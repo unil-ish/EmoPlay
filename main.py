@@ -10,7 +10,17 @@ import senticnet
 import vizualisation
 
 def main():
-    """ Main function """
+    """ Main function of EmoPlay.
+    pipeline:
+        (1) Loads senticnet [mandatory for emotions' search]
+        (2) Finds all xml files
+        (3) Makes the whole process for each xml file [takes a long time]
+        (4) Loads the play into a new object
+        (5) Loops through each speech of each character to get
+            the emotions for each speech of the play
+        (6) Exports the data to CSV, for later reuse
+        (7) If needed, reimports everything from the csv
+    """
 
     # (1) Loads senticnet [mandatory for emotions' search]
     stcnet = senticnet.Senticnet()

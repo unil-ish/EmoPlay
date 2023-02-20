@@ -80,7 +80,7 @@ class Speech:
             self.text,
             algorithm=maxsim,
             similarity_option='wup',
-            keepLemmas=True
+            keepLemmas=True,
         )
 
         # Stores disambiguation time

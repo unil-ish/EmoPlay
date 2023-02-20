@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "emoplay"
+version = "0.1.0"
+description = "EmoPlay is an educational object-oriented python project made by students from the University of Lausanne, Switzerland. EmoPlay can parse through TEI-Encoded theater plays and extract speech and speaker data as well as emotional attributes of the speeches it extracts. EmoPlay also offers an additional layer of text processing using a python implementation of Word Sense Disambiguation ([pywsd](https://github.com/alvations/pywsd)). This allows for greater and more accurate emotions extraction as results from disambiguated text often offer richer results when using the senticnet emotion dictionnary."
+authors = ["Your Name <you@example.com>"]
+license = "GNU"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+pandas = "^1.5.3"
+beautifulsoup4 = "^4.11.2"
+pywsd = "^1.2.5"
+nltk = "^3.8.1"
+tqdm = "^4.64.1"
+matplotlib = "^3.7.0"
+seaborn = "^0.12.2"
+lxml = "^4.9.2"
+pdoc3 = "^0.10.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

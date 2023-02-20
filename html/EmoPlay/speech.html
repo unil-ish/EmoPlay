@@ -1,0 +1,753 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>EmoPlay.speech API documentation</title>
+<meta name="description" content="Module Speech" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>EmoPlay.speech</code></h1>
+</header>
+<section id="section-intro">
+<p>Module Speech</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;
+    Module Speech
+&#34;&#34;&#34;
+
+import time
+import pywsd
+import nltk
+
+from pywsd.similarity import max_similarity as maxsim
+
+# from nltk.corpus import wordnet
+
+# Uncomment this if needed
+# nltk.download(&#39;stopwords&#39;)
+# nltk.download(&#39;punkt&#39;)
+# nltk.download(&#39;averaged_perceptron_tagger&#39;)
+# nltk.download(&#39;wordnet&#39;)
+# nltk.download(&#39;omw-1.4&#39;)
+
+class Speech:
+    &#34;&#34;&#34;
+        Speech class.
+
+        It is used to store the text of each speech spoken
+        by a character in the play, and allows the user
+        to easily obtain the values they are looking for
+        (e.g. the amount of words, the primary/secondary
+        emotions of the speech, etc.).
+    &#34;&#34;&#34;
+
+    def __init__(self, text, scene, speech_id):
+        &#34;&#34;&#34; Constructor. &#34;&#34;&#34;
+
+        self.text = text
+        self.text_disambiguate = None
+        self.disambiguation_time = -1
+        self.pywsd_output = None
+        self.tokenized_text = None
+        self.tokenized_emotions = None
+        self.primary_emotion = None
+        self.secondary_emotion = None
+        self.scene = scene
+        self.id = speech_id
+
+    def tokenize(self):
+        &#34;&#34;&#34; Tokenizes the speech. Returns a list of tokenized words.
+            e.g. [&#39;Hello&#39;, &#39;world&#39;, &#39;!&#39;]
+        &#34;&#34;&#34;
+
+        # Checks if text has already been disambiguated
+        if not self.text_disambiguate:
+            self.disambiguate()
+            print(f&#39;# Successfully disambiguated speech {self.id} in {self.disambiguation_time}s&#39;)
+
+        # NLTK tokenization
+        self.tokenized_text = nltk.word_tokenize(self.text_disambiguate)
+
+        return self.tokenized_text
+
+    @property
+    def countWords(self):
+        &#34;&#34;&#34; Counts the amount of token/words in the speech.
+            Returns an integer.
+        &#34;&#34;&#34;
+
+        # Tokenizing if needed
+        if not self.tokenized_text:
+            self.tokenize()
+
+        return len(self.tokenized_text)
+
+    def disambiguate(self):
+        &#34;&#34;&#34; Disambiguates words in a speech. Returns a string.  &#34;&#34;&#34;
+
+        # Stores start
+        disamb_start = time.time()
+
+        # Disambiguates speech
+        self.pywsd_output = pywsd.disambiguate(
+            self.text,
+            algorithm=maxsim,
+            similarity_option=&#39;wup&#39;,
+            keepLemmas=True,
+        )
+
+        # Stores disambiguation time
+        self.disambiguation_time = round(time.time() - disamb_start, 3)
+
+        text_disambiguate = &#39;&#39;
+
+        # Builds back the sentence
+        for pywsd_tuple in self.pywsd_output:
+            # Unpacking tuple of pywsd output
+            (word, _, synset) = pywsd_tuple
+
+            if not synset:
+                text_disambiguate = text_disambiguate + &#39; &#39; + word
+
+            # Using the first lemma&#39;s name for simplicity
+            if synset:
+                text_disambiguate = text_disambiguate + &#39; &#39; + synset.lemmas()[0].name()
+
+        # Stores disambiguated speech
+        self.text_disambiguate = text_disambiguate.strip()
+
+        return self.text_disambiguate
+
+    def getMaxEmotion(self, emotions):
+        &#34;&#34;&#34;
+            Calculates the maximal emotion based on dict
+            passed as argument and returns a single emotion.
+        &#34;&#34;&#34;
+
+        # Verifies input type to be a dict
+        if isinstance(emotions, dict):
+            return None
+
+        else:
+            # Sets None value to -1 to avoid meaningless results
+            emotions[None] = -1
+
+            # Checks if there is at least one emotion to search for
+            # different than None
+            if len(emotions) &gt; 1:
+                # Finds max
+                emotion_max_01 = max(emotions, key=emotions.get)
+                emotion_max_01_value = emotions[emotion_max_01]
+
+                # Pops out max to see if there is ex-aequo
+                emotions[emotion_max_01] = -1
+
+                # Recalculates max
+                emotion_max_02 = max(emotions, key=emotions.get)
+                emotion_max_02_value = emotions[emotion_max_02]
+
+                # Checks if the first value is different from the other
+                if (emotion_max_01_value &gt; emotion_max_02_value):
+                    return emotion_max_01
+                # If the values are the same or if no value seems
+                # to be different than the others, returns None
+                else:
+                    return None
+
+            else:
+                return None
+
+    def getEmotions(self, stcnet):
+        &#34;&#34;&#34; Gets primary and secondary emotion for a speech.
+            Returns a dict.
+        &#34;&#34;&#34;
+
+        # Verifes that stcnet is a senticnet dict
+        if not stcnet.senticnet:
+            return None
+
+        # Various variables
+        p_tokenized_emotions = {}
+        s_tokenized_emotions = {}
+        tokenized_emotions = []
+
+        # If needs to be tokenized
+        if not self.tokenized_text:
+            self.tokenize()
+
+        # First, determines emotions for each token
+        iterator = 0
+        for t in self.tokenized_text:
+            # (1) Verifies if one can find emotions for
+            # the token directly in senticnet
+            t_emotions = stcnet.emotionsOf(t)
+
+            # (2) If the emotions are not found, tries to
+            # loop through whole synonyms of senticnet to find
+            # the average emotion associated with the token
+            if not t_emotions[&#34;primary_emotion&#34;]:
+                # Finds occurences of word in synonyms
+                t_synonyms = stcnet.reverseSearch(t)
+
+                # Finds average emotions, if possible
+                t_emotions = stcnet.averageEmotionsOf(t_synonyms)
+
+                # (3) If the emotions are still not found,
+                # tries to find them in NLTK
+                if not t_emotions[&#34;primary_emotion&#34;]:
+                    emotions_tuple = self.pywsd_output[iterator]
+                    (_, _, synset) = emotions_tuple
+                    if synset:
+                        t_synonyms = [str(lemma.name()) for lemma in synset.lemmas()]
+                        t_emotions = stcnet.averageEmotionsOf(t_synonyms)
+            iterator += 1
+
+            # Gets primary/secondary emotion for current word
+            pe = t_emotions[&#39;primary_emotion&#39;]
+            se = t_emotions[&#39;secondary_emotion&#39;]
+
+            # Adds to dict for primary emotions
+            if pe in p_tokenized_emotions:
+                p_tokenized_emotions[pe] += 1
+            else:
+                p_tokenized_emotions[pe] = 1
+
+            # Adds to dict for secondary emotions
+            if se in s_tokenized_emotions:
+                s_tokenized_emotions[se] += 1
+            else:
+                s_tokenized_emotions[se] = 1
+
+            # Adds to list
+            tokenized_emotions.append(t_emotions)
+
+        # Stores the result in an attribute of speech
+        self.tokenized_emotions = tokenized_emotions
+
+        # Finds mode of the speech and sets as attribute
+        self.primary_emotion = self.getMaxEmotion(p_tokenized_emotions)
+        self.secondary_emotion = self.getMaxEmotion(s_tokenized_emotions)
+
+        # Success message
+        print(f&#39;# Successfully extracted emotions for speech id {self.id}&#39;)
+
+        return {&#34;primary_emotion&#34;:self.primary_emotion, &#34;secondary_emotion&#34;:self.secondary_emotion}</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="EmoPlay.speech.Speech"><code class="flex name class">
+<span>class <span class="ident">Speech</span></span>
+<span>(</span><span>text, scene, speech_id)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Speech class.</p>
+<p>It is used to store the text of each speech spoken
+by a character in the play, and allows the user
+to easily obtain the values they are looking for
+(e.g. the amount of words, the primary/secondary
+emotions of the speech, etc.).</p>
+<p>Constructor.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Speech:
+    &#34;&#34;&#34;
+        Speech class.
+
+        It is used to store the text of each speech spoken
+        by a character in the play, and allows the user
+        to easily obtain the values they are looking for
+        (e.g. the amount of words, the primary/secondary
+        emotions of the speech, etc.).
+    &#34;&#34;&#34;
+
+    def __init__(self, text, scene, speech_id):
+        &#34;&#34;&#34; Constructor. &#34;&#34;&#34;
+
+        self.text = text
+        self.text_disambiguate = None
+        self.disambiguation_time = -1
+        self.pywsd_output = None
+        self.tokenized_text = None
+        self.tokenized_emotions = None
+        self.primary_emotion = None
+        self.secondary_emotion = None
+        self.scene = scene
+        self.id = speech_id
+
+    def tokenize(self):
+        &#34;&#34;&#34; Tokenizes the speech. Returns a list of tokenized words.
+            e.g. [&#39;Hello&#39;, &#39;world&#39;, &#39;!&#39;]
+        &#34;&#34;&#34;
+
+        # Checks if text has already been disambiguated
+        if not self.text_disambiguate:
+            self.disambiguate()
+            print(f&#39;# Successfully disambiguated speech {self.id} in {self.disambiguation_time}s&#39;)
+
+        # NLTK tokenization
+        self.tokenized_text = nltk.word_tokenize(self.text_disambiguate)
+
+        return self.tokenized_text
+
+    @property
+    def countWords(self):
+        &#34;&#34;&#34; Counts the amount of token/words in the speech.
+            Returns an integer.
+        &#34;&#34;&#34;
+
+        # Tokenizing if needed
+        if not self.tokenized_text:
+            self.tokenize()
+
+        return len(self.tokenized_text)
+
+    def disambiguate(self):
+        &#34;&#34;&#34; Disambiguates words in a speech. Returns a string.  &#34;&#34;&#34;
+
+        # Stores start
+        disamb_start = time.time()
+
+        # Disambiguates speech
+        self.pywsd_output = pywsd.disambiguate(
+            self.text,
+            algorithm=maxsim,
+            similarity_option=&#39;wup&#39;,
+            keepLemmas=True,
+        )
+
+        # Stores disambiguation time
+        self.disambiguation_time = round(time.time() - disamb_start, 3)
+
+        text_disambiguate = &#39;&#39;
+
+        # Builds back the sentence
+        for pywsd_tuple in self.pywsd_output:
+            # Unpacking tuple of pywsd output
+            (word, _, synset) = pywsd_tuple
+
+            if not synset:
+                text_disambiguate = text_disambiguate + &#39; &#39; + word
+
+            # Using the first lemma&#39;s name for simplicity
+            if synset:
+                text_disambiguate = text_disambiguate + &#39; &#39; + synset.lemmas()[0].name()
+
+        # Stores disambiguated speech
+        self.text_disambiguate = text_disambiguate.strip()
+
+        return self.text_disambiguate
+
+    def getMaxEmotion(self, emotions):
+        &#34;&#34;&#34;
+            Calculates the maximal emotion based on dict
+            passed as argument and returns a single emotion.
+        &#34;&#34;&#34;
+
+        # Verifies input type to be a dict
+        if isinstance(emotions, dict):
+            return None
+
+        else:
+            # Sets None value to -1 to avoid meaningless results
+            emotions[None] = -1
+
+            # Checks if there is at least one emotion to search for
+            # different than None
+            if len(emotions) &gt; 1:
+                # Finds max
+                emotion_max_01 = max(emotions, key=emotions.get)
+                emotion_max_01_value = emotions[emotion_max_01]
+
+                # Pops out max to see if there is ex-aequo
+                emotions[emotion_max_01] = -1
+
+                # Recalculates max
+                emotion_max_02 = max(emotions, key=emotions.get)
+                emotion_max_02_value = emotions[emotion_max_02]
+
+                # Checks if the first value is different from the other
+                if (emotion_max_01_value &gt; emotion_max_02_value):
+                    return emotion_max_01
+                # If the values are the same or if no value seems
+                # to be different than the others, returns None
+                else:
+                    return None
+
+            else:
+                return None
+
+    def getEmotions(self, stcnet):
+        &#34;&#34;&#34; Gets primary and secondary emotion for a speech.
+            Returns a dict.
+        &#34;&#34;&#34;
+
+        # Verifes that stcnet is a senticnet dict
+        if not stcnet.senticnet:
+            return None
+
+        # Various variables
+        p_tokenized_emotions = {}
+        s_tokenized_emotions = {}
+        tokenized_emotions = []
+
+        # If needs to be tokenized
+        if not self.tokenized_text:
+            self.tokenize()
+
+        # First, determines emotions for each token
+        iterator = 0
+        for t in self.tokenized_text:
+            # (1) Verifies if one can find emotions for
+            # the token directly in senticnet
+            t_emotions = stcnet.emotionsOf(t)
+
+            # (2) If the emotions are not found, tries to
+            # loop through whole synonyms of senticnet to find
+            # the average emotion associated with the token
+            if not t_emotions[&#34;primary_emotion&#34;]:
+                # Finds occurences of word in synonyms
+                t_synonyms = stcnet.reverseSearch(t)
+
+                # Finds average emotions, if possible
+                t_emotions = stcnet.averageEmotionsOf(t_synonyms)
+
+                # (3) If the emotions are still not found,
+                # tries to find them in NLTK
+                if not t_emotions[&#34;primary_emotion&#34;]:
+                    emotions_tuple = self.pywsd_output[iterator]
+                    (_, _, synset) = emotions_tuple
+                    if synset:
+                        t_synonyms = [str(lemma.name()) for lemma in synset.lemmas()]
+                        t_emotions = stcnet.averageEmotionsOf(t_synonyms)
+            iterator += 1
+
+            # Gets primary/secondary emotion for current word
+            pe = t_emotions[&#39;primary_emotion&#39;]
+            se = t_emotions[&#39;secondary_emotion&#39;]
+
+            # Adds to dict for primary emotions
+            if pe in p_tokenized_emotions:
+                p_tokenized_emotions[pe] += 1
+            else:
+                p_tokenized_emotions[pe] = 1
+
+            # Adds to dict for secondary emotions
+            if se in s_tokenized_emotions:
+                s_tokenized_emotions[se] += 1
+            else:
+                s_tokenized_emotions[se] = 1
+
+            # Adds to list
+            tokenized_emotions.append(t_emotions)
+
+        # Stores the result in an attribute of speech
+        self.tokenized_emotions = tokenized_emotions
+
+        # Finds mode of the speech and sets as attribute
+        self.primary_emotion = self.getMaxEmotion(p_tokenized_emotions)
+        self.secondary_emotion = self.getMaxEmotion(s_tokenized_emotions)
+
+        # Success message
+        print(f&#39;# Successfully extracted emotions for speech id {self.id}&#39;)
+
+        return {&#34;primary_emotion&#34;:self.primary_emotion, &#34;secondary_emotion&#34;:self.secondary_emotion}</code></pre>
+</details>
+<h3>Instance variables</h3>
+<dl>
+<dt id="EmoPlay.speech.Speech.countWords"><code class="name">var <span class="ident">countWords</span></code></dt>
+<dd>
+<div class="desc"><p>Counts the amount of token/words in the speech.
+Returns an integer.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def countWords(self):
+    &#34;&#34;&#34; Counts the amount of token/words in the speech.
+        Returns an integer.
+    &#34;&#34;&#34;
+
+    # Tokenizing if needed
+    if not self.tokenized_text:
+        self.tokenize()
+
+    return len(self.tokenized_text)</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="EmoPlay.speech.Speech.disambiguate"><code class="name flex">
+<span>def <span class="ident">disambiguate</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Disambiguates words in a speech. Returns a string.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def disambiguate(self):
+    &#34;&#34;&#34; Disambiguates words in a speech. Returns a string.  &#34;&#34;&#34;
+
+    # Stores start
+    disamb_start = time.time()
+
+    # Disambiguates speech
+    self.pywsd_output = pywsd.disambiguate(
+        self.text,
+        algorithm=maxsim,
+        similarity_option=&#39;wup&#39;,
+        keepLemmas=True,
+    )
+
+    # Stores disambiguation time
+    self.disambiguation_time = round(time.time() - disamb_start, 3)
+
+    text_disambiguate = &#39;&#39;
+
+    # Builds back the sentence
+    for pywsd_tuple in self.pywsd_output:
+        # Unpacking tuple of pywsd output
+        (word, _, synset) = pywsd_tuple
+
+        if not synset:
+            text_disambiguate = text_disambiguate + &#39; &#39; + word
+
+        # Using the first lemma&#39;s name for simplicity
+        if synset:
+            text_disambiguate = text_disambiguate + &#39; &#39; + synset.lemmas()[0].name()
+
+    # Stores disambiguated speech
+    self.text_disambiguate = text_disambiguate.strip()
+
+    return self.text_disambiguate</code></pre>
+</details>
+</dd>
+<dt id="EmoPlay.speech.Speech.getEmotions"><code class="name flex">
+<span>def <span class="ident">getEmotions</span></span>(<span>self, stcnet)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Gets primary and secondary emotion for a speech.
+Returns a dict.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def getEmotions(self, stcnet):
+    &#34;&#34;&#34; Gets primary and secondary emotion for a speech.
+        Returns a dict.
+    &#34;&#34;&#34;
+
+    # Verifes that stcnet is a senticnet dict
+    if not stcnet.senticnet:
+        return None
+
+    # Various variables
+    p_tokenized_emotions = {}
+    s_tokenized_emotions = {}
+    tokenized_emotions = []
+
+    # If needs to be tokenized
+    if not self.tokenized_text:
+        self.tokenize()
+
+    # First, determines emotions for each token
+    iterator = 0
+    for t in self.tokenized_text:
+        # (1) Verifies if one can find emotions for
+        # the token directly in senticnet
+        t_emotions = stcnet.emotionsOf(t)
+
+        # (2) If the emotions are not found, tries to
+        # loop through whole synonyms of senticnet to find
+        # the average emotion associated with the token
+        if not t_emotions[&#34;primary_emotion&#34;]:
+            # Finds occurences of word in synonyms
+            t_synonyms = stcnet.reverseSearch(t)
+
+            # Finds average emotions, if possible
+            t_emotions = stcnet.averageEmotionsOf(t_synonyms)
+
+            # (3) If the emotions are still not found,
+            # tries to find them in NLTK
+            if not t_emotions[&#34;primary_emotion&#34;]:
+                emotions_tuple = self.pywsd_output[iterator]
+                (_, _, synset) = emotions_tuple
+                if synset:
+                    t_synonyms = [str(lemma.name()) for lemma in synset.lemmas()]
+                    t_emotions = stcnet.averageEmotionsOf(t_synonyms)
+        iterator += 1
+
+        # Gets primary/secondary emotion for current word
+        pe = t_emotions[&#39;primary_emotion&#39;]
+        se = t_emotions[&#39;secondary_emotion&#39;]
+
+        # Adds to dict for primary emotions
+        if pe in p_tokenized_emotions:
+            p_tokenized_emotions[pe] += 1
+        else:
+            p_tokenized_emotions[pe] = 1
+
+        # Adds to dict for secondary emotions
+        if se in s_tokenized_emotions:
+            s_tokenized_emotions[se] += 1
+        else:
+            s_tokenized_emotions[se] = 1
+
+        # Adds to list
+        tokenized_emotions.append(t_emotions)
+
+    # Stores the result in an attribute of speech
+    self.tokenized_emotions = tokenized_emotions
+
+    # Finds mode of the speech and sets as attribute
+    self.primary_emotion = self.getMaxEmotion(p_tokenized_emotions)
+    self.secondary_emotion = self.getMaxEmotion(s_tokenized_emotions)
+
+    # Success message
+    print(f&#39;# Successfully extracted emotions for speech id {self.id}&#39;)
+
+    return {&#34;primary_emotion&#34;:self.primary_emotion, &#34;secondary_emotion&#34;:self.secondary_emotion}</code></pre>
+</details>
+</dd>
+<dt id="EmoPlay.speech.Speech.getMaxEmotion"><code class="name flex">
+<span>def <span class="ident">getMaxEmotion</span></span>(<span>self, emotions)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Calculates the maximal emotion based on dict
+passed as argument and returns a single emotion.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def getMaxEmotion(self, emotions):
+    &#34;&#34;&#34;
+        Calculates the maximal emotion based on dict
+        passed as argument and returns a single emotion.
+    &#34;&#34;&#34;
+
+    # Verifies input type to be a dict
+    if isinstance(emotions, dict):
+        return None
+
+    else:
+        # Sets None value to -1 to avoid meaningless results
+        emotions[None] = -1
+
+        # Checks if there is at least one emotion to search for
+        # different than None
+        if len(emotions) &gt; 1:
+            # Finds max
+            emotion_max_01 = max(emotions, key=emotions.get)
+            emotion_max_01_value = emotions[emotion_max_01]
+
+            # Pops out max to see if there is ex-aequo
+            emotions[emotion_max_01] = -1
+
+            # Recalculates max
+            emotion_max_02 = max(emotions, key=emotions.get)
+            emotion_max_02_value = emotions[emotion_max_02]
+
+            # Checks if the first value is different from the other
+            if (emotion_max_01_value &gt; emotion_max_02_value):
+                return emotion_max_01
+            # If the values are the same or if no value seems
+            # to be different than the others, returns None
+            else:
+                return None
+
+        else:
+            return None</code></pre>
+</details>
+</dd>
+<dt id="EmoPlay.speech.Speech.tokenize"><code class="name flex">
+<span>def <span class="ident">tokenize</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Tokenizes the speech. Returns a list of tokenized words.
+e.g. ['Hello', 'world', '!']</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def tokenize(self):
+    &#34;&#34;&#34; Tokenizes the speech. Returns a list of tokenized words.
+        e.g. [&#39;Hello&#39;, &#39;world&#39;, &#39;!&#39;]
+    &#34;&#34;&#34;
+
+    # Checks if text has already been disambiguated
+    if not self.text_disambiguate:
+        self.disambiguate()
+        print(f&#39;# Successfully disambiguated speech {self.id} in {self.disambiguation_time}s&#39;)
+
+    # NLTK tokenization
+    self.tokenized_text = nltk.word_tokenize(self.text_disambiguate)
+
+    return self.tokenized_text</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="EmoPlay" href="index.html">EmoPlay</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="EmoPlay.speech.Speech" href="#EmoPlay.speech.Speech">Speech</a></code></h4>
+<ul class="">
+<li><code><a title="EmoPlay.speech.Speech.countWords" href="#EmoPlay.speech.Speech.countWords">countWords</a></code></li>
+<li><code><a title="EmoPlay.speech.Speech.disambiguate" href="#EmoPlay.speech.Speech.disambiguate">disambiguate</a></code></li>
+<li><code><a title="EmoPlay.speech.Speech.getEmotions" href="#EmoPlay.speech.Speech.getEmotions">getEmotions</a></code></li>
+<li><code><a title="EmoPlay.speech.Speech.getMaxEmotion" href="#EmoPlay.speech.Speech.getMaxEmotion">getMaxEmotion</a></code></li>
+<li><code><a title="EmoPlay.speech.Speech.tokenize" href="#EmoPlay.speech.Speech.tokenize">tokenize</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>
