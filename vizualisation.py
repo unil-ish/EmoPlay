@@ -12,11 +12,18 @@ class Vizualisation:
 
         It is used to display statistics of the play.
         Optionnally, each graphic can be exported as svg.
+
     """
 
     vtypes = ["bps", "bpw", "ebc", "eba"]
 
     def __init__(self, play, vtype):
+        """
+            Constructor of the Vizualisation class.
+        Args:
+            play: The play to vizualise. (Play)
+            vtype:  The type of vizualisation to display. (str)
+        """
         if vtype not in self.vtypes:
             print('# This vizualisation does not exist.')
             print(f"# Please choose between {', '.join(self.vtypes)}")
@@ -29,6 +36,14 @@ class Vizualisation:
         """
             Calls the right method depending on the vizualisation type,
             and optionnally saves the graphic inside the same directory.
+        Args:
+            save: If the graphic must be saved. (bool)
+        Returns: None
+        Examples:
+            >>> viz = Vizualisation(play, "bps")
+            >>> viz.plot()
+            >>> viz.plot(save=True)
+
         """
         if self.vtype == "bps":
             self.barPlotSpeech(save)
@@ -42,7 +57,16 @@ class Vizualisation:
             print("# No plot found!")
 
     def barPlotSpeech(self, save=False):
-        """ Displays what speaker spoke the most (speeches). """
+        """ Displays what speaker spoke the most (speeches).
+         Args:
+            save: If the graphic must be saved. (bool)
+        Returns: None
+        Examples:
+            >>> viz = Vizualisation(play, "bps")
+            >>> viz.barPlotSpeech()
+            >>> viz.barPlotSpeech(save=True)
+
+         """
 
         valeurs = {}
 
@@ -74,7 +98,16 @@ class Vizualisation:
             plt.show()
 
     def barPlotWords(self, save=False):
-        """ Displays what speaker spoke the most (words). """
+        """ Displays what speaker spoke the most (words).
+        Args:
+            save: If the graphic must be saved. (bool)
+        Returns: None
+        Examples:
+            >>> viz = Vizualisation(play, "bpw")
+            >>> viz.barPlotWords()
+            >>> viz.barPlotWords(save=True)
+
+        """
 
         valeurs = {}
 
@@ -106,7 +139,16 @@ class Vizualisation:
             plt.show()
 
     def emotionsByCharacter(self, save=False):
-        """ Displays emotion across acts for some characters. """
+        """ Displays emotion across acts for some characters.
+        Args:
+            save: If the graphic must be saved. (bool)
+        Returns: None
+        Examples:
+            >>> viz = Vizualisation(play, "ebc")
+            >>> viz.emotionsByCharacter()
+            >>> viz.emotionsByCharacter(save=True)
+
+            """
 
         # Gets the three characters that spoke the most
         valeurs = {}
@@ -178,7 +220,15 @@ class Vizualisation:
             plt.show()
 
     def emotionsByAct(self, save=False):
-        """ Displays the most frequent emotions for each act. """
+        """ Displays the most frequent emotions for each act.
+        Args:
+            save: If the graphic must be saved. (bool)
+        Returns: None
+        Examples:
+            >>> viz = Vizualisation(play, "eba")
+            >>> viz.emotionsByAct()
+            >>> viz.emotionsByAct(save=True)
+            """
 
         # Creates new df with emotions and acts
         df = pd.DataFrame(columns=['emotion', 'scene'])

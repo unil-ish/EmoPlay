@@ -23,6 +23,12 @@ class Play:
 
             The object makes it easy to access characters of
             the play and their respective speeches.
+
+            Args:
+                path (str): Path to the xml file
+            Returns:
+                None
+
         """
 
         # Declaring attributes needed to describe the play
@@ -136,7 +142,22 @@ class Play:
             print('# Note : The supplied file was not found. Skipping process.')
 
     def makeCharacters(self):
-        """ Creates a list of Characters to handle speeches easily. """
+        """ Creates a list of Characters to handle speeches easily.
+            Returns a list of Character instances.
+            Args:
+                None
+
+            Returns:
+                None
+
+            Examples:
+                >>> play = Play('path/to/file.xml')
+                >>> play.makeCharacters()
+                >>> play.characters
+                [<character.Character instance at 0x000001E5F1B0F048>, <character.Character instance at 0x000001E5F1B0F0C8>, ...]
+
+
+            """
 
         # Gets a list of unique names for the characters
         characters = self.speaker_speech.speaker.unique()
@@ -162,7 +183,19 @@ class Play:
             self.characters.append(newCharacter)
 
     def getCharacters(self):
-        """ Displays all characters in the play. """
+        """ Displays all characters in the play.
+            Returns a list of characters.
+            Args:
+                None
+            Returns: list
+                A list of characters.
+            Examples:
+                >>> play = Play('path/to/file.xml')
+                >>> play.getCharacters()
+                ['HAMLET', 'KING CLAUDIUS', 'QUEEN GERTRUDE', ...]
+
+
+        """
 
         # Loops through each character and find their name
         character_names = [character.name for character in self.characters]
@@ -178,7 +211,8 @@ class Play:
 
     @property
     def countWords(self):
-        """ Displays the length of the play in words. """
+        """ Displays the length of the play in words.
+            Returns the amount of words in the play."""
 
         words = 0
 
@@ -192,7 +226,20 @@ class Play:
         return words
 
     def to_csv(self):
-        """ Exports a play to a CSV file. """
+        """ Exports a play to a CSV file.
+            Returns a dataframe.
+            Args:
+                None
+            Returns: dataframe
+                A dataframe containing all the speeches in the play.
+            Examples:
+                >>> play = Play('path/to/file.xml')
+                >>> play.to_csv()
+                >>> play.to_csv('path/to/file.csv')
+                >>> play.to_csv('path/to/file.csv', index=False)
+
+
+                """
     
         # Constructs dataframe
         export_df = pd.DataFrame(columns=[
@@ -237,7 +284,19 @@ class Play:
             print('# An error occured while exporting to csv!')
 
     def from_csv(self, path):
-        """ Loads a play previously exported in a CSV file. """
+        """ Loads a play previously exported in a CSV file.
+            Returns a dataframe.
+
+            Args:
+                path (str): Path to the CSV file.
+            Returns:
+                dataframe: Dataframe containing the play.
+            Examples:
+                >>> play.from_csv('play.csv')
+
+
+
+        """
 
         try:
             # Loads CSV

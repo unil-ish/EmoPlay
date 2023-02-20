@@ -29,6 +29,8 @@ class Speech:
     """
 
     def __init__(self, text, scene, speech_id):
+        """ Constructor. """
+
         self.text = text
         self.text_disambiguate = None
         self.disambiguation_time = -1
@@ -41,7 +43,9 @@ class Speech:
         self.id = speech_id
 
     def tokenize(self):
-        """ Converts a string into a list of words. """
+        """ Tokenizes the speech. Returns a list of tokenized words.
+            e.g. ['Hello', 'world', '!']
+        """
 
         # Checks if text has already been disambiguated
         if not self.text_disambiguate:
@@ -55,7 +59,9 @@ class Speech:
 
     @property
     def countWords(self):
-        """ Counts the amount of token/words in the speech. """
+        """ Counts the amount of token/words in the speech.
+            Returns an integer.
+        """
 
         # Tokenizing if needed
         if not self.tokenized_text:
@@ -64,7 +70,7 @@ class Speech:
         return len(self.tokenized_text)
 
     def disambiguate(self):
-        """ Disambiguates words in a speech. """
+        """ Disambiguates words in a speech. Returns a string.  """
 
         # Stores start
         disamb_start = time.time()
@@ -139,7 +145,9 @@ class Speech:
                 return None
 
     def getEmotions(self, stcnet):
-        """ Gets primary and secondary emotion for a speech. """
+        """ Gets primary and secondary emotion for a speech.
+            Returns a dict.
+        """
 
         # Verifes that stcnet is a senticnet dict
         if not stcnet.senticnet:

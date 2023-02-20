@@ -10,12 +10,11 @@ class Senticnet:
     def __init__(self, path="senticnet/senticnet.py"):
         """
             Loads a senticnet file into a dict.
+            The path to the file is given as argument.
+            If no path is given, the default path is used.
+            Args:
+                path (str): path to the senticnet file
 
-            Usage :
-            --------
-            senticnet.Senticnet('path/to/file')
-
-            (where senticnet is the name of this imported module)
         """
 
         self.senticnet = {}
@@ -63,12 +62,16 @@ class Senticnet:
             Returns the primary and secondary emotions associated
             with a word given as argument and returns a dict
             with the two emotions, if found.
+            Args:
+                word (str): word to search for
+            Returns:
+                dict: dict with primary and secondary emotions
+            Examples:
+                >>> s = Senticnet()
+                >>> s.emotionsOf('word')
+                {'primary_emotion': 'joy', 'secondary_emotion': 'trust'}
 
-            Usage :
-            --------
-            s.emotionsOf('word')
 
-            (where s is a senticnet object)
         """
 
         try:
@@ -95,11 +98,15 @@ class Senticnet:
             Tries to find the synonyms of a word given as argument
             and returns a list of synonyms, if found.
 
-            Usage :
-            --------
-            s.synonymsOf('word')
+            Args:
+                word (str): word to search for
+            Returns:
+                list: list of synonyms
+            Examples:
+                >>> s = Senticnet()
+                >>> s.synonymsOf('word')
+                ['synonym1', 'synonym2', 'synonym3']
 
-            (where s is a senticnet object)
         """
 
         try:
@@ -114,11 +121,15 @@ class Senticnet:
             the given word passed as argument, and
             returns a list of words, if found.
 
-            Usage :
-            --------
-            s.reverseSearch('word')
+            Args:
+                word (str): word to search for
+            Returns:
+                list: list of words
+            Examples:
+                >>> s = Senticnet()
+                >>> s.reverseSearch('word')
+                ['word1', 'word2', 'word3']
 
-            (where s is a senticnet object)
         """
 
         found_words = []
@@ -142,13 +153,17 @@ class Senticnet:
             It returns a dict with the primary and secondary
             emotions (average) associated with the str or list.
 
-            Usage :
-            -------
-            s.averageEmotionsOf('word')
-                OR
-            s.averageEmotionsOf(['word1', 'word2', 'word3'])
+            Args:
+                words (str or list): words to search for
+            Returns:
+                dict: dict with primary and secondary emotions
+            Examples:
+                >>> s = Senticnet()
+                >>> s.averageEmotionsOf('word')
+                {'primary_emotion': 'joy', 'secondary_emotion': 'trust'}
+                >>> s.averageEmotionsOf(['word1', 'word2', 'word3'])
+                {'primary_emotion': 'joy', 'secondary_emotion': 'trust'}
 
-            (where s is a senticnet object)
         """
 
         primary_emotions = {}
