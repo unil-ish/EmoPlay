@@ -29,8 +29,6 @@ class Speech:
     """
 
     def __init__(self, text, scene, speech_id):
-        """ Constructor. """
-
         self.text = text
         self.text_disambiguate = None
         self.disambiguation_time = -1
@@ -39,13 +37,16 @@ class Speech:
         self.tokenized_emotions = None
         self.primary_emotion = None
         self.secondary_emotion = None
+        self.polarity = None
         self.scene = scene
         self.id = speech_id
+        self.introspection = None
+        self.temper = None
+        self.attitude = None
+        self.sensitivity = None
 
     def tokenize(self):
-        """ Tokenizes the speech. Returns a list of tokenized words.
-            e.g. ['Hello', 'world', '!']
-        """
+        """ Converts a string into a list of words. """
 
         # Checks if text has already been disambiguated
         if not self.text_disambiguate:
@@ -59,9 +60,7 @@ class Speech:
 
     @property
     def countWords(self):
-        """ Counts the amount of token/words in the speech.
-            Returns an integer.
-        """
+        """ Counts the amount of token/words in the speech. """
 
         # Tokenizing if needed
         if not self.tokenized_text:
@@ -70,7 +69,7 @@ class Speech:
         return len(self.tokenized_text)
 
     def disambiguate(self):
-        """ Disambiguates words in a speech. Returns a string.  """
+        """ Disambiguates words in a speech. """
 
         # Stores start
         disamb_start = time.time()
@@ -80,7 +79,7 @@ class Speech:
             self.text,
             algorithm=maxsim,
             similarity_option='wup',
-            keepLemmas=True,
+            keepLemmas=True
         )
 
         # Stores disambiguation time
@@ -111,43 +110,36 @@ class Speech:
             passed as argument and returns a single emotion.
         """
 
-        # Verifies input type to be a dict
-        if isinstance(emotions, dict):
-            return None
+        # Sets None value to -1 to avoid meaningless results
+        emotions[None] = -1
 
-        else:
-            # Sets None value to -1 to avoid meaningless results
-            emotions[None] = -1
+        # Checks if there is at least one emotion to search for
+        # different than None
+        if len(emotions) > 1:
+            # Finds max
+            emotion_max_01 = max(emotions, key=emotions.get)
+            emotion_max_01_value = emotions[emotion_max_01]
 
-            # Checks if there is at least one emotion to search for
-            # different than None
-            if len(emotions) > 1:
-                # Finds max
-                emotion_max_01 = max(emotions, key=emotions.get)
-                emotion_max_01_value = emotions[emotion_max_01]
+            # Pops out max to see if there is ex-aequo
+            emotions[emotion_max_01] = -1
 
-                # Pops out max to see if there is ex-aequo
-                emotions[emotion_max_01] = -1
+            # Recalculates max
+            emotion_max_02 = max(emotions, key=emotions.get)
+            emotion_max_02_value = emotions[emotion_max_02]
 
-                # Recalculates max
-                emotion_max_02 = max(emotions, key=emotions.get)
-                emotion_max_02_value = emotions[emotion_max_02]
-
-                # Checks if the first value is different from the other
-                if (emotion_max_01_value > emotion_max_02_value):
-                    return emotion_max_01
-                # If the values are the same or if no value seems
-                # to be different than the others, returns None
-                else:
-                    return None
-
+            # Checks if the first value is different from the other
+            if (emotion_max_01_value > emotion_max_02_value):
+                return emotion_max_01
+            # If the values are the same or if no value seems
+            # to be different than the others, returns None
             else:
                 return None
 
+        else:
+            return None
+
     def getEmotions(self, stcnet):
-        """ Gets primary and secondary emotion for a speech.
-            Returns a dict.
-        """
+        """ Gets primary and secondary emotion for a speech. """
 
         # Verifes that stcnet is a senticnet dict
         if not stcnet.senticnet:
@@ -156,6 +148,13 @@ class Speech:
         # Various variables
         p_tokenized_emotions = {}
         s_tokenized_emotions = {}
+
+        pol_emotions = []
+        int_emotions = []
+        tem_emotions = []
+        att_emotions = []
+        sen_emotions = []
+
         tokenized_emotions = []
 
         # If needs to be tokenized
@@ -165,9 +164,19 @@ class Speech:
         # First, determines emotions for each token
         iterator = 0
         for t in self.tokenized_text:
+            # Lowering case
+            t = t.lower()
+
             # (1) Verifies if one can find emotions for
             # the token directly in senticnet
             t_emotions = stcnet.emotionsOf(t)
+
+            # Finds polarized emotion (if able)
+            pol_emotion = stcnet.polarityOf(t)
+            int_emotion = stcnet.introspectionOf(t)
+            tem_emotion = stcnet.temperOf(t)
+            att_emotion = stcnet.attitudeOf(t)
+            sen_emotion = stcnet.sensitivityOf(t)
 
             # (2) If the emotions are not found, tries to
             # loop through whole synonyms of senticnet to find
@@ -179,14 +188,16 @@ class Speech:
                 # Finds average emotions, if possible
                 t_emotions = stcnet.averageEmotionsOf(t_synonyms)
 
+                continue
+
                 # (3) If the emotions are still not found,
                 # tries to find them in NLTK
-                if not t_emotions["primary_emotion"]:
-                    emotions_tuple = self.pywsd_output[iterator]
-                    (_, _, synset) = emotions_tuple
-                    if synset:
-                        t_synonyms = [str(lemma.name()) for lemma in synset.lemmas()]
-                        t_emotions = stcnet.averageEmotionsOf(t_synonyms)
+                #if not t_emotions["primary_emotion"]:
+                #    emotions_tuple = self.pywsd_output[iterator]
+                #    (_, _, synset) = emotions_tuple
+                #    if synset:
+                #        t_synonyms = [str(lemma.name()) for lemma in synset.lemmas()]
+                #        t_emotions = stcnet.averageEmotionsOf(t_synonyms)
             iterator += 1
 
             # Gets primary/secondary emotion for current word
@@ -205,8 +216,40 @@ class Speech:
             else:
                 s_tokenized_emotions[se] = 1
 
+            # Adds to dict for various mesures
+            if pol_emotion:
+                pol_emotions.append(pol_emotion)
+
+            if int_emotion:
+                int_emotions.append(int_emotion)
+
+            if tem_emotion:
+                tem_emotions.append(tem_emotion)
+
+            if att_emotion:
+                att_emotions.append(att_emotion)
+
+            if sen_emotion:
+                sen_emotions.append(sen_emotion)
+
             # Adds to list
             tokenized_emotions.append(t_emotions)
+
+        # Finds mean for each mesure
+        if pol_emotions:
+            self.polarity = round(sum(pol_emotions)/len(pol_emotions), 3)
+
+        if int_emotions:
+            self.introspection = round(sum(int_emotions)/len(int_emotions), 3)
+
+        if tem_emotions:
+            self.temper = round(sum(tem_emotions)/len(tem_emotions), 3)
+
+        if att_emotions:
+            self.attitude = round(sum(att_emotions)/len(att_emotions), 3)
+
+        if sen_emotions:
+            self.sensitivity = round(sum(sen_emotions)/len(sen_emotions), 3)
 
         # Stores the result in an attribute of speech
         self.tokenized_emotions = tokenized_emotions
@@ -216,6 +259,6 @@ class Speech:
         self.secondary_emotion = self.getMaxEmotion(s_tokenized_emotions)
 
         # Success message
-        print(f'# Successfully extracted emotions for speech id {self.id}')
+        print(f'# Successfully extracted emotions for speech id {self.id} : {self.primary_emotion}, {self.secondary_emotion} with an overall polarity of {self.polarity}.')
 
         return {"primary_emotion":self.primary_emotion, "secondary_emotion":self.secondary_emotion}

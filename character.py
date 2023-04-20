@@ -15,53 +15,31 @@ class Character:
     """
 
     def __init__(self, name):
-        """ Constructor.
-        Args:
-            name (str): The name of the character.
-        """
         self.name = name
         self.speeches = []
         self.primary_emotion = None
         self.secondary_emotion = None
 
     def getSpeeches(self, scene=0):
-        """ Returns the speeches of the specified scene.
-        Args:
-            scene (int): The scene number. If 0, returns all speeches.
-        Returns:
-            list: A list of Speech objects.
-        Examples:
-            >>> character.getSpeeches(1)
-            [<speech.Speech object at 0x7f9b0c0b0a90>, <speech.Speech object at 0x7f9b0c0b0b50>]
-            >>> character.getSpeeches(2)
-            [<speech.Speech object at 0x7f9b0c0b0c10>, <speech.Speech object at 0x7f9b0c0b0cd0>]
-            >>> character.getSpeeches(0)
-            [<speech.Speech object at 0x7f9b0c0b0a90>, <speech.Speech object at 0x7f9b0c0b0b50>, <speech.Speech object at 0x7f9b0c0b0c10>, <speech.Speech object at 0x7f9b0c0b0cd0>]
+        """ Returns the speeches of the specified scene. """
 
-            """
+        speech_list = []
 
-        return [
-            speech
-            for speech in self.speeches
-            if scene > 0 and speech.scene == scene or scene <= 0
-        ]
+        # Loops through each speech
+        for speech in self.speeches:
+            # Testing scene if in the same scene
+            if scene > 0:
+                if speech.scene == scene:
+                    speech_list.append(speech)
+                else:
+                    continue
+            else:
+                speech_list.append(speech)
+
+        return speech_list
 
     def getEmotions(self, scene=0):
-        """ Estimates the general emotion of the character throughout the play.
-        Args:
-            scene (int): The scene number. If 0, returns the emotions of the whole play.
-        Returns:
-            dict: A dictionary containing the primary and secondary emotions.
-        Examples:
-            >>> character.getEmotions(1)
-            {'primary_emotion': 'joy', 'secondary_emotion': 'trust'}
-            >>> character.getEmotions(2)
-            {'primary_emotion': 'joy', 'secondary_emotion': 'trust'}
-            >>> character.getEmotions(0)
-            {'primary_emotion': 'joy', 'secondary_emotion': 'trust'}
-
-
-        """
+        """ Estimates the general emotion of the character throughout the play. """
 
         speeches = self.getSpeeches(scene)
 
@@ -106,11 +84,7 @@ class Character:
 
     @property
     def countWords(self):
-        """ Counts the amount of words spoken by a character.
-        Returns:
-            int: The amount of words spoken by a character.
-
-        """
+        """ Counts the amount of words spoken by a character. """
 
         # Loops through each speech and makes the sum
         wordCount = sum([speech.countWords for speech in self.speeches])
@@ -119,11 +93,6 @@ class Character:
 
     @property
     def countSpeeches(self):
-        """ Counts the amount of speeches belonging to a character.
-        Returns:
-            int: The amount of speeches belonging to a character.
-
-        """
-
+        """ Counts the amount of speeches belonging to a character. """
 
         return len(self.speeches)

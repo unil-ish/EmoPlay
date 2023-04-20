@@ -10,25 +10,7 @@ import senticnet
 import vizualisation
 
 def main():
-    """ Main function of EmoPlay.
-
-    pipeline:
-
-        (1) Loads senticnet [mandatory for emotions' search]
-
-        (2) Finds all xml files
-
-        (3) Makes the whole process for each xml file [takes a long time]
-
-        (4) Loads the play into a new object
-
-        (5) Loops through each speech of each character to get
-            the emotions for each speech of the play
-
-        (6) Exports the data to CSV, for later reuse
-
-        (7) If needed, reimports everything from the csv
-    """
+    """ Main function """
 
     # (1) Loads senticnet [mandatory for emotions' search]
     stcnet = senticnet.Senticnet()
@@ -59,22 +41,24 @@ def main():
             #p.from_csv(path_csv)
 
             # (8) Generates and saves plots
+            
+            # UNCOMMENT WHAT FOLLOWS IF WISHED !
 
             # Bar plot for speeches
-            barPlotSpeeches = vizualisation.Vizualisation(p, "bps")
-            barPlotSpeeches.plot(True)
+            #barPlotSpeeches = vizualisation.Vizualisation(p, "bps")
+            #barPlotSpeeches.plot(True)
 
             # Bar plot for words
-            barPlotWords = vizualisation.Vizualisation(p, "bpw")
-            barPlotWords.plot(True)
+            #barPlotWords = vizualisation.Vizualisation(p, "bpw")
+            #barPlotWords.plot(True)
 
             # Emotions by character
-            emotionByCharacter = vizualisation.Vizualisation(p, "ebc")
-            emotionByCharacter.plot(True)
+            #emotionByCharacter = vizualisation.Vizualisation(p, "ebc")
+            #emotionByCharacter.plot(True)
 
             # Emotions by act
-            emotionByAct = vizualisation.Vizualisation(p, "eba")
-            emotionByAct.plot(True)
+            #emotionByAct = vizualisation.Vizualisation(p, "eba")
+            #emotionByAct.plot(True)
 
 if __name__ == '__main__':
     main()
