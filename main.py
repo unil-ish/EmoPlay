@@ -17,6 +17,7 @@ def main():
 
     # (2) Finds all xml files
     plays = glob.glob("theater/*.xml")
+    #plays = ["theater/romeo-and-juliet_TEIsimple_FolgerShakespeare.xml"] # Debug
 
     # (3) Makes the whole process for each xml file [takes a long time]
     for path in plays:
