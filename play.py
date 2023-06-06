@@ -54,7 +54,10 @@ class Play:
                 self.author = soup.find('author').text
 
                 # Gets the date of publication
-                self.date = soup.find('imprint').find('date').text
+                try:
+                    self.date = soup.find('imprint').find('date').text
+                except AttributeError:
+                    pass
 
                 # Finds all the scenes (if any)
                 scenes = soup.find_all("div", attrs={"type" : "scene"})
@@ -155,6 +158,7 @@ class Play:
                 speeches_list.append(row.speech)
 
             # Creates Character instance and links speeches to it
+            char = char.replace('\n', '').strip()
             newCharacter = character.Character(char)
             newCharacter.speeches = speeches_list
 
@@ -199,6 +203,23 @@ class Play:
             'id',
             'speaker',
             'scene',
+            'tokenized_text',
+            'tokenized_emotions',
+            'avg_primary_emotion',
+            'avg_secondary_emotion',
+            'avg_polarity',
+            'avg_introspection',
+            'avg_temper',
+            'avg_attitude',
+            'avg_sensitivity',
+            'words'
+        ])
+        
+        """
+        export_df = pd.DataFrame(columns=[
+            'id',
+            'speaker',
+            'scene',
             'primary_emotion',
             'secondary_emotion',
             'polarity',
@@ -209,7 +230,6 @@ class Play:
             'words'
         ])
 
-        """
         # Constructs dataframe
         export_df = pd.DataFrame(columns=[
             'id',
@@ -230,7 +250,24 @@ class Play:
         for c in self.characters:
             # Loops through each speech
             for s in c.speeches:
+                export_df = export_df.append({
+                    'id':s.id,
+                    'speaker':c.name,
+                    'scene':s.scene,
+                    'tokenized_text':s.tokenized_text,
+                    'tokenized_emotions':s.tokenized_emotions,
+                    'avg_primary_emotion':s.primary_emotion,
+                    'avg_secondary_emotion':s.secondary_emotion,
+                    'avg_polarity':s.polarity,
+                    'avg_introspection':s.introspection,
+                    'avg_temper':s.temper,
+                    'avg_attitude':s.attitude,
+                    'avg_sensitivity':s.sensitivity,
+                    'words':s.countWords
+                }, ignore_index=True)
+                
 
+                """
                 export_df = export_df.append({
                     'id':s.id,
                     'speaker':c.name,
@@ -245,7 +282,6 @@ class Play:
                     'words':s.countWords
                 }, ignore_index=True)
 
-                """
                 export_df = export_df.append({
                     'id':s.id,
                     'speaker':c.name,
@@ -264,7 +300,7 @@ class Play:
         # Saves csv to same folder than the script
         try:
             csv_name = self.title + ' - Exported.csv'
-            export_df.to_csv(csv_name, index=False)
+            export_df.to_csv(csv_name, sep="\t", index=False)
             print('# Successfully exported to csv!')
 
         except IOError:
