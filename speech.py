@@ -188,8 +188,6 @@ class Speech:
                 # Finds average emotions, if possible
                 t_emotions = stcnet.averageEmotionsOf(t_synonyms)
 
-                continue
-
                 # (3) If the emotions are still not found,
                 # tries to find them in NLTK
                 #if not t_emotions["primary_emotion"]:
