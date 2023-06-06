@@ -97,14 +97,18 @@ p.from_csv(path/to/pre-process-csv)
 plot = vizualisation.Vizualisation(p, "Your Vizualisation Code (ie. 'bps')")
 ```
 
-## Point-biserial correlation
-2023.06.05: An additionnal script has been added in order to compute the point-biserial correlation between SenticNet and the Big 5 model of personnality. It is recommended to use the ```Features extraction``` script below and produce similar output data for the use of the current script.
+## Update as of 2023.06.06
+### Point-biserial correlation
+An additionnal script ```point_biserial_calculation.py``` has been added in order to compute the point-biserial correlation between SenticNet dimension and the dimensions of the Big 5 model of personnality (OCEAN). It is recommended to use the ```features_extractor.py``` script below and produce similar output data for the use of the current script. An example of input data to be fed into the script is given at ```data/features_extractor_example.csv```.
 
-## Features extraction
-2023.06.05: This script is used to extract emotions data from a list of essays, based on the same principle as the main program. It works on dataset such as the [Kaggle Dataset](https://www.kaggle.com/datasets/manjarinandimajumdar/essayscsv) or any dataset formatted the same.
+### Features extraction
+The script ```features_extractor.py``` is used to extract emotions data from a list of essays, based on the same principle as the main program. It works on datasets such as the [Kaggle Dataset](https://www.kaggle.com/datasets/manjarinandimajumdar/essayscsv) and should work on any dataset formatted the same.
 
-## A-Box creation
-2023.06.05: The script ```abox_fill.py``` is used to merge data exported by the main program and fill the ontology stored in ```ontology``` with the data of a theater play. It stores the data related to the speeches of each character, their associated emotions, and also computes the position of each character on SenticNet dimensions and OCEAN dimensions then stores the data inside the ontology.
+### A-Box creation
+The script ```abox_fill.py``` is used to merge data exported by the current modified version of the program and to fill the ontology stored in ```ontology/psy_model_edit.rdf``` with the data of a theater play. It stores the data related to the speeches of each character, their associated emotions, tokens and position on each SenticNet dimension, and also computes the position of each character on SenticNet dimensions and OCEAN dimensions tofinally store the data inside the new ontology (exported as ```ontology/psy_model_edit_filled.xml```).
+
+### Ontologies
+Two sample ontologies are provided in the ```ontology``` folder in order for anyone to explore the final data produced once the full procedure is complete. The filled ontologies ```ontology/psy_model_edit_filled_the_devil.xml``` and ```ontology/psy_model_edit_filled_romeo_juliet.xml``` can be opened with softwares like [Protégé](https://protege.stanford.edu/).
 
 ## Conclusion
 ### Scope and Limitations
