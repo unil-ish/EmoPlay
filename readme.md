@@ -76,6 +76,7 @@ To reload a processed file, you can use :
 ```
 p.from_csv(path/to/file)
 ```
+
 ## Visualisations
 EmoPlay uses the Seaborn python library to output graphical plots of the emotional data extracted from the plays. These are the currently supported graphs :
 |code|method|description|
@@ -84,6 +85,7 @@ EmoPlay uses the Seaborn python library to output graphical plots of the emotion
 |bpw|barPlotWords()|Displays what speaker spoke the most (words)
 |ebc|emotionsByCharacter()|Displays emotion across acts for some characters
 |eba|emotionsByAct()|Displays the most frequent emotions for each act
+
 ### Visualisation usage
 Please note that the following example uses a pre-processed file stored in CSV format. In order for emotions plots to compute, you need to process, for each character and each speech, the associated emotions as shown above.
 ```python
@@ -94,6 +96,16 @@ p = play.Play(path/to/play)
 p.from_csv(path/to/pre-process-csv)
 plot = vizualisation.Vizualisation(p, "Your Vizualisation Code (ie. 'bps')")
 ```
+
+## Point-biserial correlation
+2023.06.05: An additionnal script has been added in order to compute the point-biserial correlation between SenticNet and the Big 5 model of personnality. It is recommended to use the ```Features extraction``` script below and produce similar output data for the use of the current script.
+
+## Features extraction
+2023.06.05: This script is used to extract emotions data from a list of essays, based on the same principle as the main program. It works on dataset such as the [Kaggle Dataset](https://www.kaggle.com/datasets/manjarinandimajumdar/essayscsv) or any dataset formatted the same.
+
+## A-Box creation
+2023.06.05: The script ```abox_fill.py``` is used to merge data exported by the main program and fill the ontology stored in ```ontology``` with the data of a theater play. It stores the data related to the speeches of each character, their associated emotions, and also computes the position of each character on SenticNet dimensions and OCEAN dimensions then stores the data inside the ontology.
+
 ## Conclusion
 ### Scope and Limitations
 This program has been developed to work with TEI-Encoded, XML, theater play files. The purpose of this program is to extract speaker's data from the XML file, including every line spoken by every character, as well as the emotional attributes (taken from Senticnet) of every line in the play.
@@ -103,4 +115,4 @@ As of right now, this program loops through every line of a play to extract emot
 This design has the inevitable disadvantage of being very computationally heavy, mostly because of the disambiguation that is executed on every speech line. Performance improvements could be made in order to accelerate the text processing of the plays.
 
 ### Credits
-This project was done by Sinem Kilic, Ellijah Green, Antonin Schnyder and Pedro Tomé under the supervision of Mr. Davide Picca, teacher of object-oriented programming at the University of Lausanne, Switzerland.
+This project was done by Sinem Kilic, Ellijah Green, Antonin Schnyder and Pedro Tomé under the supervision of Pr. Davide Picca, teacher of object-oriented programming at the University of Lausanne, Switzerland.
