@@ -242,14 +242,43 @@ def abox_fill(csv, onto):
         i_speech += 1
 
     # ---
-    # (5) Compute mean value on each SenticNet dimension for each character
+    # (5.1) Compute mean value on each SenticNet dimension for the whole play
     # ---
+    average_personnality = { 'att' : [], 'int' : [], 'sen' : [], 'tem' : [], 'pol' : [] }
+    
+    # Store each value for each SenticNet dimension for the whole play
+    for character in characters_perso:
+        for k in characters_perso[character]:
+            for v in characters_perso[character][k]:
+                average_personnality[k].append(v)
+            
+    # Compute mean value for each SenticNet dimension for the whole play
+    for senticnet_dimension in average_personnality:
+        valeurs = average_personnality[senticnet_dimension]
+        average_personnality[senticnet_dimension] = round( sum(valeurs) / len(valeurs), 5 )
+
+    # ---
+    # (5.2) Compute mean value on each SenticNet dimension for each character
+    # ---
+    
+    # Print outputs to console
+    print('character\tO\tC\tE\tA\tN')
+    
     for character in characters_perso:
         # Compute mean
         for k in characters_perso[character]:
             valeurs = characters_perso[character][k]
             if valeurs:
-                characters_perso[character][k] = round( sum(valeurs) / len(valeurs), 4 )
+            
+                # Raw mean
+                raw_mean = round( sum(valeurs) / len(valeurs), 4 )
+                
+                # Adjusted mean
+                adjusted_mean = round( raw_mean - average_personnality[k], 4 )
+                
+                # Store adjusted mean
+                characters_perso[character][k] = adjusted_mean
+
             else:
                 characters_perso[character][k] = None
 
@@ -275,8 +304,8 @@ def abox_fill(csv, onto):
         temp_dim = list(temp_dim)[::-1]
 
         # Computer OCEAN values on each dimension
-        max_dim = 2 # How many dimensions to take in account
-        char_ocean_perso = { 'o' : [0], 'c' : [0], 'e' : [0], 'a' : [0], 'n' : [0] }
+        max_dim = 5 # How many dimensions to take in account
+        char_ocean_perso = { 'o' : [], 'c' : [], 'e' : [], 'a' : [], 'n' : [] }
 
         # Loop on max_dim
         for x in range(max_dim):
@@ -297,14 +326,28 @@ def abox_fill(csv, onto):
                     # Add to dict
                     char_ocean_perso[k].append(moyenne)
 
-        # Computer mean on each dimension
+
+        big_5_profile = { 'o' : 0, 'c' : 0, 'e' : 0, 'a' : 0, 'n' : 0 }
+
+        # Compute mean on each dimension
         for k,v in char_ocean_perso.items():
-            moyenne_moyennes = round(sum(v) / max_dim, 3)
+            moyenne_moyennes = round( sum(v) / max_dim, 5)
             
+            # Replace list of values by mean
+            # Raw values won't be used anymore later in the code
+            # and are already stored in the ontology
+            big_5_profile[k] = moyenne_moyennes
+
             # Associate each value to the character
             char = stcnet2ocean + character
             g.add( (char, property_hXv[k], Literal(moyenne_moyennes) ) )
 
+        # Print outputs to console
+        console_output = character
+        for k,v in big_5_profile.items():
+            console_output += f'\t{v}'
+        print(console_output)
+        
     # ---
     # (6) Export to xml
     # ---
@@ -316,8 +359,8 @@ def main():
     """
         Main
     """
-    abox_fill('example_csv/The Devil - Exported.csv', 'ontology/psy_model_edit.rdf') # csv, ontology
+
+    abox_fill('example_csv/Romeo and Juliet - Exported.csv', 'ontology/psy_model_edit.rdf') # csv, ontology
 
 if __name__ == '__main__':
     main()
-
